@@ -78,6 +78,10 @@ patches, I'll be happy to receive these through other means as well.
 
 ## Changelog
 
+### 0.9 (2013-10-01)
+
+- Update for API changes until Textadept 7.0 beta 4
+
 ### 0.8 (2013-07-11)
 
 - Update for module name change to `file_types` in Textadept 7.0 beta
