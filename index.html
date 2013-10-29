@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <title>Textredux</title>
-    <link href="site.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Bowlby+One+SC' rel='stylesheet' type='text/css'>
-  </head>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Textredux</title>
+<link href='http://fonts.googleapis.com/css?family=Bowlby+One+SC' rel='stylesheet' type='text/css'>
+<link href="ldoc.css" rel="stylesheet">
+</head>
 
-  <body>
-    <span id="forkongithub"><a href="https://github.com/rgieseke/textredux">Fork me on GitHub</a></span>
-    <div class="container">
-      <div class="header">
-        <span class="title">Textredux</span>
-      </div>
-      <div class="nav">
-        <ul>
-          <li><a href="index.html">Main</a></li>
-          <li><a href="index.html#Installation">Installation</a></li>
-          <li><a href="index.html#Usage">Usage</a></li>
-          <li><a href="index.html#Code">Code</a></li>
-          <li><a href="index.html#Contribute">Contribute</a></li>
-          <li><a href="index.html#Changelog">Changelog</a></li>
-          <li><a href="tour.html">Visual Tour</a></li>
-        </ul>
-      </div>
-      <div class="main"><p>Textredux is a module for the <a href="http://foicica.com/textadept/">Textadept editor</a>
+<body>
+
+<div id="sidebar">
+<ul class='menu'>
+<li><a href="#">Textredux</a></li>
+<li><a href="index.html#Installation">Installation</a></li>
+<li><a href="index.html#Usage">Usage</a></li>
+<li><a href="index.html#Code">Code</a></li>
+<li><a href="index.html#Contribute">Contribute</a></li>
+<li><a href="index.html#Changelog">Changelog</a></li>
+<li><a href="tour.html">Visual Tour</a></li>
+<li><a href="api.html">API Docs</a></li>
+</ul>
+</div>
+
+<div class="container">
+<div class="content">
+<h1>Textredux</h1>
+
+<p>Textredux is a module for the <a href="http://foicica.com/textadept/">Textadept editor</a>
 that offers a set of text based replacement interfaces for core Textadept
 functionality. The current version offers:</p>
 
@@ -50,37 +52,47 @@ inject text based interfaces whereever it can (e.g. file open or theme selection
 
 <p>To install the module, just unpack the module into the</p>
 
-<pre><code>~/.textadept/modules/textredux
-</code></pre>
+<pre>~/.textadept/modules/textredux</pre>
 
 <p>directory.
 Alternatively you can clone Textredux into it:</p>
 
-<pre><code>cd ~/.textadept/modules
+<pre>
+cd ~/.textadept/modules
 git clone https://github.com/rgieseke/textredux.git
-</code></pre>
+</pre>
 
 <h2 id="Usage"><a href="#Usage">Usage</a></h2>
 
-<p>Having installed the module, there are two ways you can use it.</p>
+<p>Having installed the module, there are two ways you can use it. Note that due to
+Textredux re-using colors defined in your theme file, loading Textredux modules
+should be wrapped using
+<a href="http://foicica.com/textadept/api/events.html#INITIALIZED)">events.INITIALIZED</a>.
+</p>
 
 <p>1) Cherrypick the functionality you want from the different modules by assigning
 key bindings to the desired functions. As an example, if you would like to use
-the text based file browser and normally opens files using <code>Ctrl + o</code>, then the
+the text based file browser and normally opens files using <code>Ctrl-O</code>, then the
 following code in your <code>init.lua</code> would do the trick:</p>
 
-<pre><code>_M.textredux = require 'textredux'
-keys.co = _M.textredux.fs.open_file
-</code></pre>
+<pre>
+events.connect(events.INITIALIZED, function()
+  textredux = require 'textredux'
+  keys.co = textredux.fs.open_file
+end)
+</pre>
 
 <p>2) If you can&rsquo;t get enough of text based interfaces and the joy they provide,
 then the hijack module is for you. Simple place this in your <code>init.lua</code>:</p>
 
-<pre><code>require 'textredux.hijack'
-</code></pre>
+<pre>
+events.connect(events.INITIALIZED, function()
+  require 'textredux.hijack'
+end)
+</pre>
 
 <p>As the name suggest, Textredux has now hijacked your environment. All your
-regular key bindings should now use TextRedux where applicable. To get the
+regular key bindings should now use Textredux where applicable. To get the
 regular GUI elements you can click the menu.</p>
 
 <p>Regardless of the approach chosen, the
@@ -88,7 +100,7 @@ regular GUI elements you can click the menu.</p>
 in-depth documentation for the various modules, including customization tips.</p>
 
 <p>Also, make sure to take a brief look at the <a href="tour.html">visual tour</a> for some
-quick tips on using TextRedux.</p>
+quick tips on using Textredux.</p>
 
 <h2 id="Code"><a href="#Code">Code</a></h2>
 
@@ -190,7 +202,6 @@ patches, I&rsquo;ll be happy to receive these through other means as well.</p>
 <h3>0.1 (2012-01-20)</h3>
 
 <p>First public release.</p>
-      </div>
-    </div>
-  </body>
+</div>
+</body>
 </html>
