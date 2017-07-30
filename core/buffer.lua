@@ -195,14 +195,11 @@ function M.new(title)
 end
 
 -- Activate Textredux keys mode on buffer or view switch and file open.
--- Otherwise activate Textadept's  default keys  mode.
 local function set_keys_mode()
   if ce_active then
     keys.MODE = ce_active.keys_mode
   elseif buffer._textredux then
     keys.MODE = buffer._textredux.keys_mode
-  else
-    keys.MODE = nil
   end
 end
 events.connect(events.BUFFER_AFTER_SWITCH, set_keys_mode)
